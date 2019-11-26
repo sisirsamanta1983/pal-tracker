@@ -37,4 +37,4 @@ jobs:
         password: $CF_PASSWORD
         organization: $CF_ORG
         space: $CF_SPACE
-        edge:true
+        edge: true
