@@ -5,4 +5,4 @@ applications:
   route: pal-tracker-sisir-gautam.cfapps.io
   env:
     WELCOME_MESSAGE: Hello from Cloud Foundry new route
-    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 8.+ } }'
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
