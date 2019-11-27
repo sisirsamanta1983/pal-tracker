@@ -31,6 +31,7 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
     compile("org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion")
     compile("mysql:mysql-connector-java:6.0.6")
+    compile("org.springframework.boot:spring-boot-starter-actuator:$springBootVersion")
 
 }
 
@@ -38,6 +39,8 @@ def developmentDbUrl = "jdbc:mysql://localhost:3306/tracker_dev?user=tracker&use
 bootRun.environment([
         "WELCOME_MESSAGE": "hello hi",
         "SPRING_DATASOURCE_URL": "jdbc:mysql://localhost:3306/tracker_dev?user=tracker&useSSL=false&useTimezone=true&serverTimezone=UTC&useLegacyDatetimeCode=false",
+        "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*",
+        "MANAGEMENT_ENDPOINT_HEALTH_SHOWDETAILS": "always",
 ])
 
 def testDbUrl = "jdbc:mysql://localhost:3306/tracker_test?user=tracker&useSSL=false&useTimezone=true&serverTimezone=UTC&useLegacyDatetimeCode=false"
@@ -47,7 +50,9 @@ test.environment([
         "PORT":"2020",
         "MEMORY_LIMIT": "2048",
         "CF_INSTANCE_INDEX" : "1",
-        "CF_INSTANCE_ADDR" : "10.202.20.12"
+        "CF_INSTANCE_ADDR" : "10.202.20.12",
+        "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*",
+        "MANAGEMENT_ENDPOINT_HEALTH_SHOWDETAILS": "always",
 
 ])
 flyway {
@@ -59,4 +64,8 @@ flyway {
 
 task testMigrate(type: FlywayMigrateTask) {
     url = testDbUrl
+}
+
+springBoot {
+    buildInfo()
 }
